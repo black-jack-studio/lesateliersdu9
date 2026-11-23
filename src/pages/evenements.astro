@@ -24,7 +24,7 @@ const exposants = [
   title="Événements"
   description="Portes ouvertes de Noël aux Ateliers du 9 : samedi 12 décembre 2026, de 10h à 18h, entrée gratuite."
   active="/evenements/"
-  cta={{ label: "Appeler Stéphanie", href: `tel:${SITE.steph.tel}`, secondaryLabel: "Itinéraire", secondaryHref: SITE.maps }}
+  cta={{ label: "Appeler Stéphanie", href: `tel:${SITE.steph.tel}`, secondaryLabel: "Email", secondaryHref: `mailto:${SITE.email}` }}
 >
   <section>
     <div class="h-64 overflow-hidden md:h-96">
@@ -73,8 +73,7 @@ const exposants = [
       </div>
 
       <div class="mt-10 flex flex-wrap gap-3">
-        <a href={SITE.maps} class="rounded-full bg-fir px-6 py-3 font-display text-sm uppercase tracking-tight text-paper">Itinéraire</a>
-        <a href={`tel:${SITE.steph.tel}`} class="rounded-full border-2 border-fir px-6 py-3 font-display text-sm uppercase tracking-tight text-fir">Contact : {SITE.steph.phone}</a>
+        <a href={`tel:${SITE.steph.tel}`} class="rounded-full bg-fir px-6 py-3 font-display text-sm uppercase tracking-tight text-paper">Contact : {SITE.steph.phone}</a>
       </div>
       </div>
 
