@@ -1,0 +1,167 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import tartelettes from "../assets/photos/creation-tartelettes.jpg";
+import kobold from "../assets/photos/kobold-salle-de-bain.jpg";
+import stephPortrait from "../assets/photos/steph-portrait.jpg";
+import koboldVk7 from "../assets/photos/kobold-aspirateur-vk7.jpg";
+import koboldRobot from "../assets/photos/kobold-robot-vr7.jpg";
+import koboldDuo from "../assets/photos/kobold-duo-speed.jpg";
+import koboldTextile from "../assets/photos/kobold-brosseur-textile.jpg";
+import koboldVitres from "../assets/photos/kobold-vit-power.jpg";
+import cuisineGuyDemarle from "../assets/photos/cuisine-guy-demarle.jpg";
+import smarties from "../assets/photos/creation-smarties.jpg";
+import sushi from "../assets/photos/creation-sushi.jpg";
+import roses from "../assets/photos/creation-roses.jpg";
+import madeleines from "../assets/photos/creation-madeleines.jpg";
+import canneles from "../assets/photos/creation-canneles.jpg";
+import fruitsRouges from "../assets/photos/creation-fruits-rouges.jpg";
+import marguerite from "../assets/photos/creation-marguerite.jpg";
+import tarteTomates from "../assets/photos/creation-tarte-tomates.jpg";
+import mignardises from "../assets/photos/creation-mignardises.jpg";
+import bouchees from "../assets/photos/creation-bouchees.jpg";
+import PractitionerHero from "../components/PractitionerHero.astro";
+import { SITE } from "../data/nav";
+
+const offers = [
+  {
+    n: "01",
+    title: "Ateliers culinaires Guy Demarle",
+    text: "Cuisiner entre amis ou en famille, en matinée, après-midi ou soirée, avec du matériel de professionnel. De 4 à 10 personnes, sur inscription. Participation de 10 €, déduite de vos achats le jour de l'atelier.",
+  },
+  {
+    n: "02",
+    title: "Démonstration Kobold",
+    text: "Présentation de la gamme Kobold de Vorwerk, à domicile ou sur place.",
+  },
+  {
+    n: "03",
+    title: "Devenir conseiller·ère",
+    text: "Vendeuse à domicile Guy Demarle ou Kobold, à temps partiel ou complet. Stéphanie vous présente le métier.",
+  },
+];
+
+const koboldProducts = [
+  { img: koboldVk7, name: "Aspirateur balai VK7", text: "Détecte le type de sol et adapte sa puissance. Jusqu'à 40 min d'autonomie." },
+  { img: koboldRobot, name: "Robot VR7", text: "Cartographie vos pièces et se vide tout seul dans sa base." },
+  { img: koboldDuo, name: "Duo Speed", text: "Aspire et lave en même temps, séchage ultra rapide." },
+  { img: koboldTextile, name: "Brosseur textile PB7", text: "Canapés, matelas, sièges de voiture, même les poils d'animaux." },
+  { img: koboldVitres, name: "Nettoyeur de vitres VG100", text: "Lave et sèche vitres et miroirs en un seul passage." },
+];
+
+const creations = [
+  { img: sushi, alt: "Sushi cake au saumon et à l'avocat" },
+  { img: smarties, alt: "Gâteaux chocolat et bonbons colorés" },
+  { img: roses, alt: "Bouchées en forme de rose" },
+  { img: canneles, alt: "Cannelés" },
+  { img: marguerite, alt: "Entremets marguerite à la vanille" },
+  { img: tarteTomates, alt: "Cheesecake salé aux tomates cerises" },
+  { img: mignardises, alt: "Plateau de mignardises" },
+  { img: bouchees, alt: "Bouchées crème et tomate séchée" },
+];
+---
+
+<Layout
+  title="Stéphanie"
+  description="Stéphanie Ollivier : ateliers culinaires Guy Demarle et démonstration Kobold de Vorwerk, à domicile ou aux Ateliers du 9."
+  active="/stephanie/"
+  cta={{ label: "Réserver un atelier", href: `mailto:${SITE.email}?subject=${encodeURIComponent("Réservation d'un atelier")}` }}
+>
+  <PractitionerHero
+    name="Stéphanie"
+    fullName="Stéphanie Ollivier"
+    role="Cuisine & Kobold"
+    lines={["Ateliers culinaires Guy Demarle.", "Démonstration Kobold de Vorwerk.", "À domicile ou aux Ateliers du 9."]}
+    cta={{ label: "Réserver un atelier", href: `mailto:${SITE.email}?subject=${encodeURIComponent("Réservation d'un atelier")}` }}
+    photos={[
+      { img: tartelettes, alt: "Tartelettes aux radis réalisées en atelier", position: "50% 60%" },
+      { img: fruitsRouges, alt: "Barquettes aux fruits rouges" },
+      { img: madeleines, alt: "Madeleines au sucre perlé", position: "50% 55%" },
+    ]}
+  />
+
+  <section class="mx-auto max-w-4xl px-5 py-16 md:px-8 md:py-24">
+    <div class="flex flex-col gap-10">
+      {offers.map((o) => (
+        <div class="grid grid-cols-[3rem_1fr] gap-4 border-t border-taupe pt-6 md:grid-cols-[4rem_1fr]">
+          <span class="font-display text-2xl text-fir/40 md:text-3xl">{o.n}</span>
+          <div>
+            <h2 class="text-2xl text-fir md:text-3xl">{o.title}</h2>
+            <p class="mt-2 max-w-xl text-base leading-relaxed text-ink/75">{o.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-fir py-16 md:py-24">
+    <div class="mx-auto grid max-w-5xl gap-10 px-5 md:grid-cols-[0.9fr_1.1fr] md:items-center md:gap-14 md:px-8">
+      <Image src={stephPortrait} alt="Stéphanie Ollivier en tablier Guy Demarle" class="aspect-[4/5] w-full object-cover object-top" widths={[500, 800]} sizes="(min-width: 768px) 40vw, 100vw" />
+      <div>
+      <h2 class="text-4xl text-paper sm:text-5xl">Mon expérience</h2>
+      <ul class="mt-6 flex flex-col text-base leading-relaxed text-paper/85 md:text-lg">
+        <li class="border-t border-paper/25 py-5">Manager et conseillère Guy Demarle depuis 17 ans. J'anime des ateliers culinaires à domicile (37, 86, 41, 45, 18 et autres départements sur demande) et des ateliers à thème aux Ateliers du 9.</li>
+        <li class="border-t border-paper/25 py-5">Conseillère Kobold de Vorwerk depuis janvier 2025, je vous présente un équipement haut de gamme pour entretenir parfaitement votre maison.</li>
+        <li class="border-y border-paper/25 py-5">J'accompagne une équipe de conseiller·ère·s que je forme au métier de vendeur à domicile.</li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+    <h2 class="text-3xl text-fir sm:text-4xl">Mes créations</h2>
+    <p class="mt-3 max-w-md text-base leading-relaxed text-ink/75">Quelques recettes réalisées en atelier, avec le matériel Guy Demarle.</p>
+    <div class="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
+      {creations.map((c) => (
+        <Image src={c.img} alt={c.alt} class="aspect-[3/4] w-full object-cover" widths={[300, 500]} sizes="(min-width: 768px) 25vw, 50vw" />
+      ))}
+    </div>
+  </section>
+
+  <section id="kobold" class="bg-paper py-16 md:py-24">
+    <div class="mx-auto max-w-6xl px-5 md:px-8">
+      <div class="grid gap-10 md:grid-cols-[1.1fr_0.9fr] md:items-center md:gap-14">
+        <div>
+          <h2 class="text-5xl text-fir sm:text-6xl">Kobold de Vorwerk</h2>
+          <p class="mt-4 max-w-md text-lg leading-relaxed text-ink/80">Changez votre relation au ménage.</p>
+          <ul class="mt-8 flex max-w-md flex-col text-base leading-relaxed text-ink/75">
+            <li class="border-t border-taupe py-3">Très léger : l'aspirateur balai ne pèse que 2,3 kg et se faufile sous les meubles.</li>
+            <li class="border-t border-taupe py-3">Il reconnaît le type de sol et adapte lui-même sa puissance.</li>
+            <li class="border-y border-taupe py-3">Sac filtre certifié qui retient 99,99 % des poussières et allergènes.</li>
+          </ul>
+          <a href={`mailto:${SITE.email}?subject=${encodeURIComponent("Démonstration Kobold")}`} class="mt-8 inline-block rounded-full bg-fir px-6 py-3 font-display text-sm uppercase tracking-tight text-paper transition-colors duration-200 hover:bg-fir-dark">Découvrir le Kobold chez vous</a>
+        </div>
+        <Image src={kobold} alt="L'aspirateur balai et le robot Kobold dans une salle de bain" class="aspect-[4/5] w-full object-cover" widths={[500, 800]} sizes="(min-width: 768px) 40vw, 100vw" />
+      </div>
+
+      <h3 class="mt-16 text-3xl text-fir md:mt-24">La gamme</h3>
+      <ul class="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-5">
+        {koboldProducts.map((k) => (
+          <li>
+            <div class="flex aspect-[4/5] items-end justify-center">
+              <Image src={k.img} alt={k.name} class="max-h-full w-full object-contain object-bottom" widths={[300, 560]} sizes="(min-width: 768px) 20vw, 50vw" />
+            </div>
+            <h4 class="mt-4 text-xl text-fir">{k.name}</h4>
+            <p class="mt-1 text-sm leading-relaxed text-ink/70">{k.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="bg-paper-dim py-16 md:py-24">
+    <div class="mx-auto grid max-w-5xl gap-8 px-5 md:grid-cols-[1.2fr_1fr] md:items-center md:px-8">
+      <Image src={cuisineGuyDemarle} alt="La cuisine des ateliers culinaires Guy Demarle aux Ateliers du 9" class="aspect-[3/2] w-full object-cover" widths={[600, 900, 1200]} sizes="(min-width: 768px) 55vw, 100vw" />
+      <div>
+        <h2 class="text-3xl text-fir sm:text-4xl">On cuisine ensemble ?</h2>
+        <p class="mt-4 max-w-md text-base leading-relaxed text-ink/75">
+          Réservez votre atelier culinaire Guy Demarle entre amis ou en famille, ou demandez une démonstration du Kobold de Vorwerk.
+          Écrivez-nous, on vous répond rapidement.
+        </p>
+        <div class="mt-6">
+          <a href={`mailto:${SITE.email}?subject=${encodeURIComponent("Réservation d'un atelier")}`} class="inline-block rounded-full bg-fir px-6 py-3 font-display text-sm uppercase tracking-tight text-paper">Réserver un atelier</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

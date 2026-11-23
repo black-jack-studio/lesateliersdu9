@@ -1,0 +1,80 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  name: string;
+  fullName: string;
+  role: string;
+  lines: string[];
+  cta: { label: string; href: string };
+  link?: { label: string; href: string };
+  photos: { img: ImageMetadata; alt: string; position?: string }[];
+}
+
+const { name, fullName, role, lines, cta, link, photos } = Astro.props;
+const [main, ...side] = photos;
+---
+
+<section class="bg-fir">
+  <div class="mx-auto grid max-w-6xl md:grid-cols-[1fr_1.15fr]">
+    <!-- Photos : une grande, deux petites -->
+    <div class="grid h-[40vh] max-h-[360px] grid-cols-[1.35fr_1fr] grid-rows-2 gap-1 order-2 md:h-[min(82vh,760px)] md:max-h-none">
+      <Image
+        src={main.img}
+        alt={main.alt}
+        class="row-span-2 h-full min-h-0 w-full object-cover"
+        style={`object-position: ${main.position ?? "50% 50%"}`}
+        widths={[500, 800, 1100]}
+        sizes="(min-width: 768px) 32vw, 58vw"
+        loading="eager"
+      />
+      {side.map((p) => (
+        <Image
+          src={p.img}
+          alt={p.alt}
+          class="h-full min-h-0 w-full object-cover"
+          style={`object-position: ${p.position ?? "50% 50%"}`}
+          widths={[400, 700]}
+          sizes="(min-width: 768px) 24vw, 42vw"
+          loading="eager"
+        />
+      ))}
+    </div>
+
+    <!-- Texte -->
+    <div class="flex flex-col justify-center px-5 py-10 order-1 md:px-8 md:py-16 lg:pr-14">
+      <h1 class="text-7xl text-paper sm:text-8xl lg:text-[6rem]">{name}</h1>
+      <p class="mt-4 font-display text-xl uppercase tracking-tight text-paper/70 md:text-2xl">{fullName} · {role}</p>
+      <div class="mt-8 h-px w-16 bg-taupe/50" aria-hidden="true"></div>
+      <p class="mt-8 max-w-md text-lg leading-relaxed text-paper/85">
+        {lines.map((l, i) => (
+          <>
+            {l}
+            {i < lines.length - 1 && <br />}
+          </>
+        ))}
+      </p>
+      <div class="mt-10 flex flex-wrap items-center gap-3">
+        <a
+          href={cta.href}
+          class="inline-block rounded-full bg-paper px-7 py-3.5 font-display text-base uppercase tracking-tight text-fir transition-colors duration-200 hover:bg-cream"
+        >
+          {cta.label}
+        </a>
+        {link && (
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 rounded-full border-2 border-paper/40 px-7 py-3 font-display text-base uppercase tracking-tight text-paper transition-colors duration-200 hover:border-paper"
+          >
+            {link.label}
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+  <div class="h-px w-full bg-taupe/40"></div>
+</section>

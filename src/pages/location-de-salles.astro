@@ -1,0 +1,119 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import salle60Vue from "../assets/photos/salle60-vue.jpg";
+import salle60Cuisine from "../assets/photos/salle60-cuisine.jpg";
+import salle60Table from "../assets/photos/salle60-table.jpg";
+import salle60Tapis from "../assets/photos/salle60-tapis.jpg";
+import salle60Entree from "../assets/photos/salle60-entree.jpg";
+import salle20Massage from "../assets/photos/salle20-massage.jpg";
+import salle20Bureau from "../assets/photos/salle20-bureau.jpg";
+import salle20Cabinet from "../assets/photos/salle20-cabinet.jpg";
+import PhotoCarousel from "../components/PhotoCarousel.astro";
+import { SITE } from "../data/nav";
+
+const durations = ["1 heure", "2 heures", "3 heures", "½ journée (4 h)", "5 heures", "6 heures", "7 heures", "Journée (8 h)"];
+
+const rooms = [
+  {
+    n: "01",
+    name: "Espace culinaire, réunion et yoga",
+    size: "60 m²",
+    desc: "Un bureau, un espace cuisine, des WC et une salle modulable : réunion, yoga, atelier ou espace de travail.",
+    prices: ["22 €", "37 €", "53 €", "68 €", "83 €", "96 €", "111 €", "124 €"],
+    equipment: ["Tables et chaises", "Tapis de yoga", "Rétroprojecteur", "Wi-Fi", "Four, plaque vitro et frigo-congélateur", "Machine à café / thé", "WC"],
+    img: salle60Vue,
+    alt: "La salle de 60 m² avec sa grande table et ses tapis",
+    gallery: [
+      { img: salle60Cuisine, alt: "L'îlot de la cuisine" },
+      { img: salle60Table, alt: "La grande table de l'espace culinaire" },
+      { img: salle60Tapis, alt: "L'espace modulable" },
+      { img: salle60Entree, alt: "L'entrée de la salle" },
+    ],
+  },
+  {
+    n: "02",
+    name: "Bureau et cabinet",
+    size: "20 m²",
+    desc: "Deux pièces : un bureau pour le coaching et un espace bien-être pour le yoga, les postures ou le massage. WC sur place.",
+    prices: ["15,50 €", "28 €", "37 €", "46 €", "53 €", "62 €", "68 €", "74 €"],
+    equipment: ["Bureau", "Wi-Fi", "Tables de massage", "Tapis de yoga", "WC"],
+    img: salle20Massage,
+    alt: "Le cabinet de 20 m² avec sa table de massage",
+    gallery: [
+      { img: salle20Bureau, alt: "L'espace bureau" },
+      { img: salle20Cabinet, alt: "L'espace bien-être" },
+    ],
+  },
+];
+---
+
+<Layout
+  title="Location de salles"
+  description="Louez une salle aux Ateliers du 9 à Sainte-Catherine-de-Fierbois : espace culinaire, réunion et yoga de 60 m², bureau et cabinet de 20 m². Tarifs 2026."
+  active="/location-de-salles/"
+  cta={{ label: "Demander une date", href: `mailto:${SITE.email}?subject=${encodeURIComponent("Location de salle")}` }}
+>
+  <section class="mx-auto max-w-3xl px-5 py-16 text-center md:px-8 md:py-24">
+    <p class="font-display text-sm uppercase tracking-tight text-fir/50">05 · À louer</p>
+    <h1 class="mt-2 text-5xl text-fir sm:text-6xl">Louez nos locaux</h1>
+    <p class="mt-6 text-balance text-lg leading-relaxed text-ink/75">
+      Vous cherchez un espace pour vos ateliers, vos séances, vos formations ou vos réunions ? Deux espaces sont
+      disponibles à la location, à l'heure ou à la journée.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-5 pb-16 md:px-8 md:pb-24">
+    <div class="flex flex-col gap-20">
+      {rooms.map((room) => (
+        <article class="border-t border-taupe pt-8">
+          <div class="grid gap-8 md:grid-cols-2 md:items-start md:gap-10">
+            <PhotoCarousel images={[{ img: room.img, alt: room.alt }, ...room.gallery]} label={`Photos : ${room.name}`} />
+            <div>
+              <span class="font-body text-xs text-fir/50">{room.n} · {room.size}</span>
+              <h2 class="mt-1 text-3xl text-fir sm:text-4xl">{room.name}</h2>
+              <p class="mt-3 max-w-md text-base leading-relaxed text-ink/75">{room.desc}</p>
+
+              <table class="mt-6 w-full max-w-sm text-sm tabular-nums">
+                <caption class="sr-only">Tarifs TTC, {room.name}</caption>
+                <thead>
+                  <tr class="border-b border-fir/40 text-left">
+                    <th scope="col" class="pb-2 font-normal text-ink/50">Durée</th>
+                    <th scope="col" class="pb-2 text-right font-normal text-ink/50">Tarif TTC</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {durations.map((d, i) => (
+                    <tr class="border-b border-taupe">
+                      <th scope="row" class="py-2 text-left font-normal text-ink/80">{d}</th>
+                      <td class="py-2 text-right font-display text-lg text-fir">{room.prices[i]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              <h3 class="mt-8 text-xl text-fir">Équipements</h3>
+              <ul class="mt-3 flex flex-wrap gap-2">
+                {room.equipment.map((e) => (
+                  <li class="rounded-full border border-fir/30 px-3 py-1 text-xs text-fir">{e}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-fir py-16 md:py-24">
+    <div class="mx-auto max-w-3xl px-5 text-center md:px-8">
+      <h2 class="text-3xl text-paper sm:text-4xl">Disponibilités et réservation</h2>
+      <p class="mt-4 text-base leading-relaxed text-paper/75">Contactez-nous.</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <a href={`tel:${SITE.steph.tel}`} class="rounded-full bg-paper px-6 py-3 font-display text-sm uppercase tracking-tight text-fir">Stéphanie · {SITE.steph.phone}</a>
+        <a href={`tel:${SITE.vincent.tel}`} class="rounded-full bg-paper px-6 py-3 font-display text-sm uppercase tracking-tight text-fir">Vincent · {SITE.vincent.phone}</a>
+      </div>
+      <a href={`mailto:${SITE.email}?subject=${encodeURIComponent("Location de salle")}`} class="mt-4 inline-block break-all text-base text-paper underline decoration-paper/40 underline-offset-4">{SITE.email}</a>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,217 @@
+---
+import { Image, getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  images: { img: ImageMetadata; alt: string }[];
+  label: string;
+}
+
+const { images, label } = Astro.props;
+const full = await Promise.all(images.map((i) => getImage({ src: i.img, width: 1800, format: "webp" })));
+const total = images.length;
+---
+
+<div class="photo-carousel" data-carousel>
+  <div class="relative">
+    <div
+      data-track
+      class="flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      role="region"
+      aria-roledescription="carrousel"
+      aria-label={label}
+      tabindex="0"
+    >
+      {images.map((item, idx) => (
+        <button
+          type="button"
+          data-slide
+          data-full={full[idx].src}
+          data-alt={item.alt}
+          class="group relative w-full shrink-0 snap-center cursor-zoom-in"
+          aria-label={`Voir en grand : ${item.alt}`}
+        >
+          <Image
+            src={item.img}
+            alt={item.alt}
+            class="aspect-[4/5] w-full object-cover"
+            widths={[500, 800, 1100]}
+            sizes="(min-width: 768px) 45vw, 100vw"
+            loading={idx === 0 ? "eager" : "lazy"}
+          />
+        </button>
+      ))}
+    </div>
+
+    <button type="button" data-prev class="carousel-arrow left-3" aria-label="Photo précédente">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+    </button>
+    <button type="button" data-next class="carousel-arrow right-3" aria-label="Photo suivante">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+    </button>
+  </div>
+
+  <div class="mt-3 flex items-center justify-between gap-4">
+    <span data-count class="font-display text-lg tabular-nums text-fir" aria-live="polite">1 / {total}</span>
+    <button type="button" data-open-current class="inline-flex items-center gap-2 text-sm text-ink/70 underline decoration-taupe underline-offset-4 hover:text-fir">
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      Voir en grand
+    </button>
+  </div>
+
+  <dialog data-dialog class="carousel-dialog" aria-label={label}>
+    <div class="flex h-full flex-col">
+      <div class="flex items-center justify-between px-5 py-4 md:px-8">
+        <span data-fcount class="font-display text-xl tabular-nums text-paper">1 / {total}</span>
+        <button type="button" data-close class="grid h-11 w-11 place-items-center rounded-full border-2 border-paper/40 text-paper hover:border-paper" aria-label="Fermer">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" /></svg>
+        </button>
+      </div>
+      <div data-stage class="relative grid min-h-0 flex-1 place-items-center px-4 pb-4 md:px-20 md:pb-8">
+        <img data-full-img src={full[0].src} alt={images[0].alt} class="fullscreen-img object-contain" decoding="async" />
+        <button type="button" data-fprev class="carousel-arrow left-3 md:left-6" aria-label="Photo précédente">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </button>
+        <button type="button" data-fnext class="carousel-arrow right-3 md:right-6" aria-label="Photo suivante">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </button>
+      </div>
+      <p data-caption class="px-5 pb-6 text-center text-sm text-paper/70">{images[0].alt}</p>
+    </div>
+  </dialog>
+</div>
+
+<style>
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    translate: 0 -50%;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-paper) 92%, transparent);
+    color: var(--color-fir);
+    transition: background-color 200ms cubic-bezier(0.16, 1, 0.3, 1), scale 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .carousel-arrow:hover {
+    background: var(--color-paper);
+    scale: 1.06;
+  }
+  .carousel-dialog {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    border: 0;
+    background: var(--color-fir-dark);
+  }
+  /* La photo tient toujours entière dans l'écran : hauteur moins l'en-tête (compteur), la légende et les marges */
+  .fullscreen-img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: calc(100dvh - 10rem);
+  }
+  .carousel-dialog::backdrop {
+    background: rgb(20 20 20 / 0.6);
+  }
+  .carousel-dialog[open] {
+    animation: carousel-in 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes carousel-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .carousel-dialog[open] { animation: none; }
+  }
+</style>
+
+<script>
+  const reduce = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((root) => {
+    const track = root.querySelector<HTMLElement>("[data-track]")!;
+    const slides = [...root.querySelectorAll<HTMLButtonElement>("[data-slide]")];
+    const n = slides.length;
+    const count = root.querySelector<HTMLElement>("[data-count]")!;
+    const dialog = root.querySelector<HTMLDialogElement>("[data-dialog]")!;
+    const fullImg = dialog.querySelector<HTMLImageElement>("[data-full-img]")!;
+    const fcount = dialog.querySelector<HTMLElement>("[data-fcount]")!;
+    const caption = dialog.querySelector<HTMLElement>("[data-caption]")!;
+    let index = 0;
+
+    const label = (i: number) => `${i + 1} / ${n}`;
+    const wrap = (i: number) => (i + n) % n;
+
+    const go = (i: number, smooth = true) => {
+      index = wrap(i);
+      track.scrollTo({ left: index * track.clientWidth, behavior: smooth && !reduce() ? "smooth" : "auto" });
+      count.textContent = label(index);
+    };
+
+    track.addEventListener(
+      "scroll",
+      () => {
+        const i = Math.round(track.scrollLeft / track.clientWidth);
+        if (i !== index && i >= 0 && i < n) {
+          index = i;
+          count.textContent = label(index);
+        }
+      },
+      { passive: true },
+    );
+
+    root.querySelector("[data-prev]")!.addEventListener("click", () => go(index - 1));
+    root.querySelector("[data-next]")!.addEventListener("click", () => go(index + 1));
+    track.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") { e.preventDefault(); go(index - 1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); go(index + 1); }
+    });
+
+    const show = (i: number) => {
+      index = wrap(i);
+      const s = slides[index];
+      fullImg.src = s.dataset.full!;
+      fullImg.alt = s.dataset.alt ?? "";
+      caption.textContent = s.dataset.alt ?? "";
+      fcount.textContent = label(index);
+    };
+
+    const open = (i: number) => {
+      show(i);
+      dialog.showModal();
+    };
+
+    slides.forEach((s, i) => s.addEventListener("click", () => open(i)));
+    root.querySelector("[data-open-current]")!.addEventListener("click", () => open(index));
+    dialog.querySelector("[data-fprev]")!.addEventListener("click", () => show(index - 1));
+    dialog.querySelector("[data-fnext]")!.addEventListener("click", () => show(index + 1));
+    dialog.querySelector("[data-close]")!.addEventListener("click", () => dialog.close());
+
+    dialog.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") show(index - 1);
+      if (e.key === "ArrowRight") show(index + 1);
+    });
+
+    // Clic en dehors de la photo et des boutons : fermer
+    dialog.querySelector("[data-stage]")!.addEventListener("click", (e) => {
+      if (e.target === e.currentTarget) dialog.close();
+    });
+
+    // Glisser au doigt dans la vue plein écran
+    let startX = 0;
+    dialog.addEventListener("touchstart", (e) => { startX = e.touches[0].clientX; }, { passive: true });
+    dialog.addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) show(index + (dx < 0 ? 1 : -1));
+    });
+
+    // En refermant, le carrousel se cale sur la dernière photo vue
+    dialog.addEventListener("close", () => go(index, false));
+  });
+</script>

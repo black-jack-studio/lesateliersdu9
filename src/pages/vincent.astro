@@ -1,0 +1,132 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import yogaGroupe from "../assets/photos/vincent-yoga-groupe.jpg";
+import yogaEnfants from "../assets/photos/vincent-yoga-enfants.jpg";
+import seance1 from "../assets/photos/vincent-seance-1.jpg";
+import seance2 from "../assets/photos/vincent-seance-2.jpg";
+import seance3 from "../assets/photos/vincent-seance-3.jpg";
+import vincentPortrait from "../assets/photos/vincent-portrait-v2.jpg";
+import PractitionerHero from "../components/PractitionerHero.astro";
+import { SITE } from "../data/nav";
+
+const profile = [
+  { n: "01", title: "Qui", text: "Formateur en gestion du stress, ancien coach auprès des Armées. Enseignant de yoga, formé au yoga du rire par l'Institut Français du Yoga du Rire." },
+  { n: "02", title: "Quoi", text: "Apprendre à gérer les déclencheurs imprévus qui provoquent une émotion excessive ou un stress inapproprié, avec des outils mis en pratique en quelques séances." },
+  { n: "03", title: "Comment", text: "Réduire l'impact du stress et des émotions mal gérées en régulant, puis en réduisant, les tensions physiques, physiologiques et psychologiques." },
+];
+
+const offers = [
+  { n: "04", title: "Séances individuelles", text: "Yoga, relaxation et gestion du stress aux Ateliers du 9 : postures simples, respiration guidée, à votre rythme." },
+  { n: "05", title: "Ateliers en groupe", text: "Yoga, yoga du rire et relaxation à plusieurs, y compris en famille, pour relâcher les tensions dans la bonne humeur." },
+  { n: "06", title: "Entreprises et associations", text: "Ateliers bien-être et cohésion : mobilité, rire collectif, détente posturale. Ponctuels ou réguliers, sur devis." },
+];
+
+const reviews = [
+  { name: "Nathalie B.", text: "Professionnel à l'écoute et doté de nombreuses techniques complémentaires qui lui permettent d'adapter ses propositions aux besoins de la personne." },
+  { name: "Hervé R.", text: "Très belle expérience autour d'une séance de relaxation dynamique. Le point de tension sur lequel je me suis concentré en début de séance a disparu." },
+  { name: "Isabelle B.", text: "Un excellent moment de prise de conscience du corps lors des mouvements proposés en lien avec la respiration. Un professionnel que je recommande vivement." },
+];
+
+const gallery = [
+  { img: yogaGroupe, alt: "Séance de relaxation en groupe" },
+  { img: yogaEnfants, alt: "Atelier de yoga parents-enfants" },
+];
+---
+
+<Layout
+  title="Vincent"
+  description="Vincent Machet : gestion du stress, yoga, yoga du rire et relaxation aux Ateliers du 9, avec un ancien coach des Armées."
+  active="/vincent/"
+  cta={{ label: "Appeler Vincent", href: `tel:${SITE.vincent.tel}`, secondaryLabel: "Email", secondaryHref: `mailto:${SITE.email}` }}
+>
+  <PractitionerHero
+    name="Vincent"
+    fullName="Vincent Machet"
+    role="Bien-être"
+    lines={["Venez cultiver votre jardin intérieur.", "Coaching, respiration, yoga et yoga du rire."]}
+    cta={{ label: "Réserver une séance", href: `mailto:${SITE.email}?subject=${encodeURIComponent("Séance avec Vincent")}` }}
+    link={{ label: "Site Aromethyl", href: SITE.vincentSite }}
+    photos={[
+      { img: seance1, alt: "L'espace bien-être, tapis et pouf de méditation", position: "50% 60%" },
+      { img: seance2, alt: "Le bureau de coaching" },
+      { img: seance3, alt: "Le coin accueil et lecture", position: "50% 60%" },
+    ]}
+  />
+
+  <section class="mx-auto max-w-4xl px-5 py-16 md:px-8 md:py-24">
+    <h2 class="text-3xl text-fir sm:text-4xl">Apprenez à me connaître</h2>
+    <div class="mt-10 flex flex-col gap-10">
+      {profile.map((o) => (
+        <div class="grid grid-cols-[3rem_1fr] gap-4 border-t border-taupe pt-6 md:grid-cols-[4rem_1fr]">
+          <span class="font-display text-2xl text-fir/40 md:text-3xl">{o.n}</span>
+          <div>
+            <h3 class="text-2xl text-fir md:text-3xl">{o.title}</h3>
+            <p class="mt-2 max-w-xl text-base leading-relaxed text-ink/75">{o.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-fir py-16 md:py-24">
+    <div class="mx-auto max-w-4xl px-5 md:px-8">
+      <h2 class="text-3xl text-paper sm:text-4xl">Mes accompagnements</h2>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {offers.map((o) => (
+          <div class="border-t border-paper/30 pt-5">
+            <span class="font-body text-xs text-paper/50">{o.n}</span>
+            <h3 class="mt-1 text-2xl text-paper">{o.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-paper/75">{o.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+    <h2 class="text-3xl text-fir sm:text-4xl">En séance</h2>
+    <div class="mt-8 grid gap-3 md:grid-cols-2">
+      {gallery.map((g) => (
+        <Image src={g.img} alt={g.alt} class="aspect-[4/3] w-full object-cover" widths={[400, 700]} sizes="(min-width: 768px) 50vw, 100vw" />
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-fir py-16 md:py-24">
+    <div class="mx-auto max-w-6xl px-5 md:px-8">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <h2 class="text-3xl text-paper sm:text-4xl">Ils en parlent</h2>
+        <a href={SITE.vincentSite} target="_blank" rel="noopener" class="text-sm text-paper/70 underline decoration-paper/30 underline-offset-4 hover:text-paper">18 avis Google sur son site</a>
+      </div>
+      <div class="mt-10 grid gap-8 md:grid-cols-3">
+        {reviews.map((rv) => (
+          <figure class="border-t border-paper/30 pt-5">
+            <blockquote class="text-base leading-relaxed text-paper/85">« {rv.text} »</blockquote>
+            <figcaption class="mt-4 font-display text-lg uppercase tracking-tight text-paper/60">{rv.name}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper-dim py-16 md:py-24">
+    <div class="mx-auto grid max-w-4xl gap-8 px-5 md:grid-cols-[1fr_1.2fr] md:items-center md:px-8">
+      <Image src={vincentPortrait} alt="Vincent Machet" class="aspect-[4/5] w-full object-cover" widths={[500, 800]} sizes="(min-width: 768px) 40vw, 100vw" />
+      <div>
+        <h2 class="text-3xl text-fir sm:text-4xl">Prendre rendez-vous</h2>
+        <p class="mt-4 max-w-md text-base leading-relaxed text-ink/75">
+          Pour une séance individuelle ou pour organiser une intervention en groupe, appelez Vincent ou écrivez aux Ateliers du 9.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href={`tel:${SITE.vincent.tel}`} class="rounded-full bg-fir px-6 py-3 font-display text-sm uppercase tracking-tight text-paper">{SITE.vincent.phone}</a>
+          <a href={`mailto:${SITE.email}`} class="rounded-full border-2 border-fir px-6 py-3 font-display text-sm uppercase tracking-tight text-fir">Écrire un email</a>
+        </div>
+        <p class="mt-6 text-sm text-ink/60">
+          Tarifs, agenda et actualités sur{" "}
+          <a href={SITE.vincentSite} target="_blank" rel="noopener" class="text-fir underline decoration-taupe underline-offset-4">aromethyl.fr</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

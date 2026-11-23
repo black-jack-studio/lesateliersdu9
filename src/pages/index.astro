@@ -1,0 +1,170 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import vincentPortrait from "../assets/photos/vincent-portrait-v2.jpg";
+import casiers from "../assets/photos/casiers.jpg";
+import stephPortrait from "../assets/photos/steph-portrait.jpg";
+import coachingVincent from "../assets/photos/coaching-vincent-v2.jpg";
+import salle60Vue from "../assets/photos/salle60-vue.jpg";
+import salle60Cuisine from "../assets/photos/salle60-cuisine.jpg";
+import salle60Table from "../assets/photos/salle60-table.jpg";
+import salle60Tapis from "../assets/photos/salle60-tapis.jpg";
+import salle20Cabinet from "../assets/photos/salle20-cabinet.jpg";
+import jardinBouddha from "../assets/photos/jardin-bouddha.jpg";
+import facade from "../assets/photos/facade.jpg";
+import { SITE } from "../data/nav";
+
+const ambiance = [
+  { img: salle60Cuisine, alt: "L'îlot de la cuisine des Ateliers du 9" },
+  { img: salle60Vue, alt: "La grande salle de 60 m², tables et tapis de yoga" },
+  { img: salle20Cabinet, alt: "Le cabinet de 20 m²" },
+  { img: salle60Table, alt: "La grande table de l'espace culinaire" },
+  { img: salle60Tapis, alt: "L'espace modulable préparé pour une séance" },
+  { img: jardinBouddha, alt: "Le jardin des Ateliers du 9" },
+];
+---
+
+<Layout
+  title="Accueil"
+  description="Les Ateliers du 9 à Sainte-Catherine-de-Fierbois : ateliers culinaires, yoga et coaching bien-être, location de salles, casiers de producteurs locaux."
+  active="/"
+  cta={{ label: "Appeler", href: "tel:+33674781449", secondaryLabel: "Événements", secondaryHref: "/evenements/" }}
+>
+  <!-- Hero -->
+  <section class="relative isolate overflow-hidden bg-fir">
+    <div class="mx-auto grid max-w-6xl md:grid-cols-2 md:items-center">
+      <div class="relative z-10 px-5 py-12 md:px-8 md:py-10">
+        <p class="font-display text-paper/60 text-sm uppercase tracking-tight">Sainte-Catherine-de-Fierbois</p>
+        <h1 class="mt-2 text-balance text-5xl text-paper sm:text-6xl md:text-7xl">
+          Un lieu pour<br />respirer,<br />cuisiner,<br />partager.
+        </h1>
+        <p class="mt-6 max-w-sm text-base leading-relaxed text-paper/80">
+          Les Ateliers du 9 réunissent deux praticiens sous un même toit : ateliers culinaires, yoga-relaxation,
+          coaching bien-être, conférences, et des casiers de producteurs locaux.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#ateliers" class="rounded-full bg-paper px-6 py-3 font-display text-sm uppercase tracking-tight text-fir">
+            Découvrir les ateliers
+          </a>
+          <a href="/contact/" class="rounded-full border-2 border-paper/40 px-6 py-3 font-display text-sm uppercase tracking-tight text-paper">
+            Nous contacter
+          </a>
+        </div>
+      </div>
+      <div class="grid h-[62vh] grid-cols-2 gap-1 md:h-[min(calc(100svh-5.5rem),720px)]">
+        <a href="/stephanie/" class="group relative overflow-hidden">
+          <Image
+            src={stephPortrait}
+            alt="Stéphanie Ollivier"
+            class="absolute inset-0 h-full w-full object-cover object-[50%_30%] transition-transform duration-500 group-hover:scale-[1.03]"
+            widths={[400, 700, 900]}
+            sizes="(min-width: 768px) 25vw, 50vw"
+            loading="eager"
+          />
+          <span class="absolute bottom-0 left-0 bg-fir px-4 py-2 font-display text-xl uppercase tracking-tight text-paper md:px-5 md:py-3 md:text-2xl">Stéphanie</span>
+        </a>
+        <a href="/vincent/" class="group relative overflow-hidden">
+          <Image
+            src={vincentPortrait}
+            alt="Vincent Machet"
+            class="absolute inset-0 h-full w-full object-cover object-[50%_25%] transition-transform duration-500 group-hover:scale-[1.03]"
+            widths={[400, 700, 900]}
+            sizes="(min-width: 768px) 25vw, 50vw"
+            loading="eager"
+          />
+          <span class="absolute bottom-0 left-0 bg-fir px-4 py-2 font-display text-xl uppercase tracking-tight text-paper md:px-5 md:py-3 md:text-2xl">Vincent</span>
+        </a>
+      </div>
+    </div>
+    <div class="h-px w-full bg-taupe/40"></div>
+  </section>
+
+  <!-- Intro -->
+  <section class="mx-auto max-w-3xl px-5 py-16 text-center md:px-8 md:py-24">
+    <h2 class="text-3xl text-fir sm:text-4xl">Bienvenue aux Ateliers du 9</h2>
+    <p class="mt-6 text-balance text-lg leading-relaxed text-ink/80">
+      Un espace chaleureux dédié à l'épanouissement et au partage : séances de yoga-relaxation, ateliers de cuisine
+      en groupe, conférences et formations. Deux praticiens, une même maison, pour vous accueillir à Sainte-Catherine-de-Fierbois.
+    </p>
+  </section>
+
+  <!-- Modules -->
+  <section id="ateliers" class="mx-auto max-w-6xl px-5 pb-16 md:px-8 md:pb-24">
+    <div class="grid gap-4 md:grid-cols-2">
+      <a href="/stephanie/" class="group flex flex-col overflow-hidden border border-fir/15">
+        <div class="relative h-56 overflow-hidden md:h-72">
+          <Image src={stephPortrait} alt="Stéphanie Ollivier dans la cuisine des Ateliers du 9" class="h-full w-full object-cover object-[50%_25%] transition-transform duration-300 group-hover:scale-105" widths={[500, 800]} sizes="(min-width: 768px) 50vw, 100vw" />
+        </div>
+        <div class="bg-fir p-6 md:p-8">
+          <span class="font-body text-xs text-paper/50">01 · Cuisine &amp; Kobold</span>
+          <h3 class="mt-1 text-4xl text-paper md:text-5xl">Stéphanie</h3>
+          <p class="mt-2 max-w-sm text-sm leading-relaxed text-paper/80">
+            Ateliers culinaires Guy Demarle et démonstration Kobold de Vorwerk.
+          </p>
+        </div>
+      </a>
+
+      <a href="/vincent/" class="group flex flex-col overflow-hidden border border-fir/15">
+        <div class="relative h-56 overflow-hidden md:h-72">
+          <Image src={coachingVincent} alt="" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" widths={[500, 800]} sizes="(min-width: 768px) 50vw, 100vw" />
+        </div>
+        <div class="bg-fir p-6 md:p-8">
+          <span class="font-body text-xs text-paper/50">02 · Bien-être</span>
+          <h3 class="mt-1 text-4xl text-paper md:text-5xl">Vincent</h3>
+          <p class="mt-2 max-w-sm text-sm leading-relaxed text-paper/80">
+            Venez cultiver votre jardin intérieur : coaching bien-être, yoga du rire, respiration et relaxation.
+          </p>
+        </div>
+      </a>
+
+      <a href="/location-de-salles/" class="group flex flex-col overflow-hidden border border-fir/15">
+        <div class="relative h-40 overflow-hidden md:h-48">
+          <Image src={salle60Vue} alt="" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" widths={[500, 800]} sizes="(min-width: 768px) 50vw, 100vw" />
+        </div>
+        <div class="flex-1 bg-paper-dim p-6">
+          <span class="font-body text-xs text-fir/50">03 · À louer</span>
+          <h3 class="mt-1 text-2xl text-fir md:text-3xl">Location de salles</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink/70">60m² et 20m², pour vos séances, formations ou coaching.</p>
+        </div>
+      </a>
+
+      <a href="/casiers-locaux/" class="group flex flex-col overflow-hidden border border-fir/15">
+        <div class="relative h-40 overflow-hidden md:h-48">
+          <Image src={casiers} alt="Les casiers de producteurs locaux" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" widths={[500, 800]} sizes="(min-width: 768px) 50vw, 100vw" />
+        </div>
+        <div class="flex-1 bg-paper-dim p-6">
+          <span class="font-body text-xs text-fir/50">04 · Nouveau</span>
+          <h3 class="mt-1 text-2xl text-fir md:text-3xl">Casiers locaux</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink/70">En ligne ou sur place, repartez avec des produits de producteurs locaux.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Ambiance -->
+  <section class="bg-fir py-16 md:py-24">
+    <div class="mx-auto max-w-6xl px-5 md:px-8">
+      <h2 class="text-3xl text-paper sm:text-4xl">L'ambiance du lieu</h2>
+      <div class="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3">
+        {ambiance.map((a) => (
+          <Image src={a.img} alt={a.alt} class="aspect-[3/4] w-full object-cover" widths={[300, 500, 700]} sizes="(min-width: 768px) 33vw, 50vw" />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Location -->
+  <section class="mx-auto grid max-w-6xl gap-8 px-5 py-16 md:grid-cols-[1.3fr_1fr] md:items-center md:gap-12 md:px-8 md:py-24">
+    <Image src={facade} alt="La façade des Ateliers du 9" class="aspect-[3/2] w-full object-cover" widths={[600, 900, 1300]} sizes="(min-width: 768px) 55vw, 100vw" />
+    <div>
+      <h2 class="text-3xl text-fir sm:text-4xl">Nous trouver</h2>
+      <p class="mt-4 max-w-xs text-lg leading-relaxed text-ink/80">{SITE.address}</p>
+      <a
+        href={SITE.maps}
+        class="mt-6 inline-block rounded-full border-2 border-fir px-6 py-3 font-display text-sm uppercase tracking-tight text-fir"
+      >
+        Itinéraire
+      </a>
+    </div>
+  </section>
+</Layout>

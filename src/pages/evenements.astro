@@ -1,0 +1,108 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image, getImage } from "astro:assets";
+import affiche from "../assets/photos/affiche-portes-ouvertes-noel.jpg";
+import facade from "../assets/photos/facade.jpg";
+import { SITE } from "../data/nav";
+
+const afficheFull = await getImage({ src: affiche, width: 1131, format: "webp" });
+
+const exposants = [
+  "H2O",
+  "Guy Demarle",
+  "Victoria Bijoux",
+  "Elora",
+  "Kobold",
+  "Tupperware",
+  "Secrets de miel",
+  "Just",
+  "Exhalessence",
+];
+---
+
+<Layout
+  title="Événements"
+  description="Portes ouvertes de Noël aux Ateliers du 9 : samedi 12 décembre 2026, de 10h à 18h, entrée gratuite."
+  active="/evenements/"
+  cta={{ label: "Appeler Stéphanie", href: `tel:${SITE.steph.tel}`, secondaryLabel: "Itinéraire", secondaryHref: SITE.maps }}
+>
+  <section>
+    <div class="h-64 overflow-hidden md:h-96">
+      <Image src={facade} alt="La façade des Ateliers du 9" class="h-full w-full object-cover object-[50%_60%]" widths={[800, 1400]} sizes="100vw" />
+    </div>
+    <div class="bg-fir px-5 py-16 text-center md:px-8 md:py-20">
+      <p class="font-display text-sm uppercase tracking-tight text-paper/60">04 · À l'agenda</p>
+      <h1 class="mt-2 text-5xl text-paper sm:text-6xl">Événements</h1>
+      <p class="mx-auto mt-6 max-w-2xl text-balance text-lg leading-relaxed text-paper/80">
+        Les prochains rendez-vous aux Ateliers du 9.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+    <article class="grid gap-10 border-t border-taupe pt-8 md:grid-cols-[1.25fr_1fr] md:gap-14">
+      <div>
+      <span class="font-body text-xs text-fir/50">Prochain événement</span>
+      <h2 class="mt-1 text-4xl text-fir sm:text-5xl">Portes ouvertes de Noël</h2>
+      <p class="mt-4 max-w-xl text-base leading-relaxed text-ink/75">
+        Une journée pour découvrir les Ateliers du 9 et préparer vos cadeaux de Noël auprès des exposants invités.
+      </p>
+
+      <dl class="mt-8 grid max-w-xl grid-cols-2 gap-x-6 gap-y-5 text-sm md:grid-cols-3">
+        <div>
+          <dt class="text-ink/50">Date</dt>
+          <dd class="font-display text-xl text-fir">Samedi 12 décembre 2026</dd>
+        </div>
+        <div>
+          <dt class="text-ink/50">Horaires</dt>
+          <dd class="font-display text-xl text-fir">10h – 18h</dd>
+        </div>
+        <div>
+          <dt class="text-ink/50">Entrée</dt>
+          <dd class="font-display text-xl text-fir">Gratuite</dd>
+        </div>
+      </dl>
+
+      <div class="mt-10 border-t border-taupe pt-6">
+        <h3 class="text-2xl text-fir">Les exposants</h3>
+        <ul class="mt-4 flex flex-wrap gap-2">
+          {exposants.map((e) => (
+            <li class="rounded-full border border-fir/30 px-4 py-2 text-sm text-fir">{e}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a href={SITE.maps} class="rounded-full bg-fir px-6 py-3 font-display text-sm uppercase tracking-tight text-paper">Itinéraire</a>
+        <a href={`tel:${SITE.steph.tel}`} class="rounded-full border-2 border-fir px-6 py-3 font-display text-sm uppercase tracking-tight text-fir">Contact : {SITE.steph.phone}</a>
+      </div>
+      </div>
+
+      <figure class="md:pt-2">
+        <a href={afficheFull.src} target="_blank" rel="noopener" class="group block" aria-label="Ouvrir l'affiche des portes ouvertes de Noël en grand">
+          <Image
+            src={affiche}
+            alt="Affiche : Portes ouvertes de Noël aux Ateliers du 9, samedi 12 décembre 2026 de 10h à 18h, entrée gratuite. Exposants : H2O, Guy Demarle, Victoria Bijoux, Elora, Kobold, Tupperware, Secrets de miel, Just, Exhalessence. Contact : 06 74 78 14 49, Stéphanie Ollivier."
+            class="w-full border border-taupe transition-transform duration-500 group-hover:scale-[1.01]"
+            widths={[400, 700, 1000]}
+            sizes="(min-width: 768px) 40vw, 100vw"
+          />
+        </a>
+        <figcaption class="mt-3 text-sm text-ink/60">
+          <a href={afficheFull.src} target="_blank" rel="noopener" class="underline decoration-taupe underline-offset-4 hover:text-fir">Voir l'affiche en grand</a>
+        </figcaption>
+      </figure>
+    </article>
+  </section>
+
+  <section class="bg-paper-dim py-16 md:py-24">
+    <div class="mx-auto max-w-3xl px-5 text-center md:px-8">
+      <h2 class="text-3xl text-fir sm:text-4xl">Une question ?</h2>
+      <p class="mt-4 text-base leading-relaxed text-ink/75">Stéphanie et Vincent vous répondent directement.</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <a href={`tel:${SITE.steph.tel}`} class="rounded-full bg-fir px-6 py-3 font-display text-sm uppercase tracking-tight text-paper">Stéphanie · {SITE.steph.phone}</a>
+        <a href={`tel:${SITE.vincent.tel}`} class="rounded-full border-2 border-fir px-6 py-3 font-display text-sm uppercase tracking-tight text-fir">Vincent · {SITE.vincent.phone}</a>
+      </div>
+    </div>
+  </section>
+</Layout>

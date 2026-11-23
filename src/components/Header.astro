@@ -1,0 +1,71 @@
+---
+import { NAV, SITE } from "../data/nav";
+import wordmarkWhite from "../assets/brand/wordmark-white.png";
+import { Image } from "astro:assets";
+
+interface Props {
+  active?: string;
+}
+const { active } = Astro.props;
+---
+
+<header class="sticky top-0 z-50 bg-fir">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3 md:px-8">
+    <a href="/" class="shrink-0" aria-label={`${SITE.name}, accueil`}>
+      <Image src={wordmarkWhite} alt={SITE.name} class="h-9 w-auto md:h-11" width={380} height={220} />
+    </a>
+
+    <nav class="hidden md:flex md:items-baseline md:gap-6 lg:gap-8">
+      {NAV.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            "font-display text-sm uppercase tracking-tight text-paper/80 transition-colors hover:text-paper",
+            { "text-paper border-b-2 border-paper": active === item.href },
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <input type="checkbox" id="nav-toggle" class="peer hidden" />
+    <label
+      for="nav-toggle"
+      class="flex h-10 w-10 shrink-0 flex-col items-center justify-center gap-[5px] md:hidden"
+      aria-label="Ouvrir le menu"
+    >
+      <span class="h-[3px] w-6 bg-paper"></span>
+      <span class="h-[3px] w-6 bg-paper"></span>
+      <span class="h-[3px] w-4 self-start ml-2 bg-paper"></span>
+    </label>
+
+    <div
+      class="pointer-events-none fixed inset-0 z-40 flex flex-col bg-paper opacity-0 transition-opacity duration-300 peer-checked:pointer-events-auto peer-checked:opacity-100 md:hidden"
+    >
+      <div class="flex items-center justify-between px-5 py-3">
+        <Image src={wordmarkWhite} alt="" aria-hidden="true" class="h-9 w-auto opacity-0" width={380} height={220} />
+        <label for="nav-toggle" class="flex h-10 w-10 items-center justify-center" aria-label="Fermer le menu">
+          <span class="relative block h-6 w-6">
+            <span class="absolute left-0 top-1/2 h-[3px] w-6 -translate-y-1/2 rotate-45 bg-fir"></span>
+            <span class="absolute left-0 top-1/2 h-[3px] w-6 -translate-y-1/2 -rotate-45 bg-fir"></span>
+          </span>
+        </label>
+      </div>
+      <nav class="flex flex-1 flex-col justify-center gap-1 px-6 pb-20">
+        {NAV.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              "flex items-baseline gap-3 border-b border-taupe py-3 font-display text-3xl uppercase tracking-tight text-fir",
+              { "text-fir/50": active !== item.href },
+            ]}
+          >
+            <span class="font-body text-xs font-normal tracking-normal text-fir/50">{item.n}</span>
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </div>
+  </div>
+</header>

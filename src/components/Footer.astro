@@ -1,0 +1,42 @@
+---
+import { SITE } from "../data/nav";
+import wordmarkWhite from "../assets/brand/wordmark-white.png";
+import { Image } from "astro:assets";
+---
+
+<footer class="bg-fir text-paper">
+  <div class="mx-auto max-w-6xl px-5 py-14 md:px-8">
+    <div class="grid gap-10 md:grid-cols-3">
+      <div>
+        <Image src={wordmarkWhite} alt={SITE.name} class="h-20 w-auto md:h-28" width={380} height={220} />
+      </div>
+
+      <div>
+        <h3 class="font-display text-lg uppercase tracking-tight text-paper/50">Stéphanie</h3>
+        <p class="mt-1 text-sm leading-relaxed">
+          <a href={`tel:${SITE.steph.tel}`} class="block py-2 hover:text-paper/70">{SITE.steph.phone}</a>
+        </p>
+        <h3 class="mt-6 font-display text-lg uppercase tracking-tight text-paper/50">Vincent</h3>
+        <p class="mt-1 text-sm leading-relaxed">
+          <a href={`tel:${SITE.vincent.tel}`} class="block py-2 hover:text-paper/70">{SITE.vincent.phone}</a>
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-display text-lg uppercase tracking-tight text-paper/50">Adresse</h3>
+        <p class="mt-3 text-sm leading-relaxed text-paper/90">{SITE.address}</p>
+        <h3 class="mt-6 font-display text-lg uppercase tracking-tight text-paper/50">Email</h3>
+        <a href={`mailto:${SITE.email}`} class="mt-1 block break-all py-2 text-sm hover:text-paper/70">{SITE.email}</a>
+        <h3 class="mt-6 font-display text-lg uppercase tracking-tight text-paper/50">Suivez-nous</h3>
+        <div class="mt-1 flex gap-6 text-sm">
+          <a href={SITE.facebook} class="py-2 hover:text-paper/70">Facebook</a>
+          <a href={SITE.instagram} class="py-2 hover:text-paper/70">Instagram</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col gap-2 border-t border-paper/20 pt-6 text-xs text-paper/50 md:flex-row md:items-center md:justify-between">
+      <p>© {new Date().getFullYear()} Les Ateliers du 9 · Sainte-Catherine-de-Fierbois</p>
+    </div>
+  </div>
+</footer>

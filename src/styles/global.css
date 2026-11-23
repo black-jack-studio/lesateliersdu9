@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Londrina Solid", system-ui, sans-serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+
+  --color-fir: #1f4a33;
+  --color-fir-dark: #14331f;
+  --color-paper: #ede6d2;
+  --color-paper-dim: #e3dac2;
+  --color-ink: #141414;
+  --color-cream: #ffffff;
+  --color-taupe: #cfc7b6;
+}
+
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.92;
+  }
+
+  ::selection {
+    background: var(--color-fir);
+    color: var(--color-paper);
+  }
+
+  /* Boutons pilule : même bordure pour tous, pleins comme contour */
+  a.rounded-full.font-display,
+  button.rounded-full.font-display {
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-fir);
+    outline-offset: 3px;
+  }
+
+  /* Pas de barre de défilement visible (le défilement reste actif) */
+  html {
+    scrollbar-width: none;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
+  /* Londrina laisse de la place sous les lettres : on rogne la boîte du texte
+     aux capitales pour que le libellé soit vraiment centré dans la pilule */
+  a.rounded-full.font-display,
+  button.rounded-full.font-display {
+    text-box: trim-both cap alphabetic;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
