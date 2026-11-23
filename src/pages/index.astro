@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import vincentPortrait from "../assets/photos/vincent-portrait-v2.jpg";
 import casiers from "../assets/photos/casiers.jpg";
 import stephPortrait from "../assets/photos/steph-portrait.jpg";
+import stephHero from "../assets/photos/steph-portrait-hero.jpg";
 import coachingVincent from "../assets/photos/coaching-vincent-v2.jpg";
 import salle60Vue from "../assets/photos/salle60-vue.jpg";
 import salle60Cuisine from "../assets/photos/salle60-cuisine.jpg";
@@ -54,9 +55,9 @@ const ambiance = [
       <div class="grid h-[62vh] grid-cols-2 gap-1 md:h-[min(calc(100svh-5.5rem),720px)]">
         <a href="/stephanie/" class="group relative overflow-hidden">
           <Image
-            src={stephPortrait}
+            src={stephHero}
             alt="Stéphanie Ollivier"
-            class="absolute inset-0 h-full w-full object-cover object-[50%_30%] transition-transform duration-500 group-hover:scale-[1.03]"
+            class="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
             widths={[400, 700, 900]}
             sizes="(min-width: 768px) 25vw, 50vw"
             loading="eager"
@@ -67,7 +68,7 @@ const ambiance = [
           <Image
             src={vincentPortrait}
             alt="Vincent Machet"
-            class="absolute inset-0 h-full w-full object-cover object-[50%_25%] transition-transform duration-500 group-hover:scale-[1.03]"
+            class="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
             widths={[400, 700, 900]}
             sizes="(min-width: 768px) 25vw, 50vw"
             loading="eager"
