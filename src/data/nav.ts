@@ -13,7 +13,7 @@ export const SITE = {
   email: "lesateliersdu9@gmail.com",
   address: "9 rue de la Godefroy, 37800 Sainte-Catherine-de-Fierbois",
   maps: "https://www.google.com/maps/search/?api=1&query=9+rue+de+la+Godefroy+37800+Sainte-Catherine-de-Fierbois",
-  steph: { phone: "06 74 78 14 49", tel: "+33674781449" },
+  steph: { phone: "06 74 78 14 49", tel: "+33674781449", instagram: "https://www.instagram.com/chez_stephgd", youtube: "https://www.youtube.com/@chezsteph" },
   vincent: { phone: "06 86 44 41 35", tel: "+33686444135" },
   vincentSite: "https://aromethyl.fr/",
   facebook: "https://www.facebook.com/profile.php?id=61566839937570",
